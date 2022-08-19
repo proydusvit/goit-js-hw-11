@@ -1,10 +1,8 @@
 import fetchImages from './fetch';
-import cardTemplate from './card';
+import { cardTemplate } from './card';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-
-
 
 
 const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
@@ -15,11 +13,11 @@ const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
 };
 
 function renderCardImage(arr) {
-  const markup = arr.map(item => cardTemplate(item).join(''))
-  gallery.insertAdjacentHTML("beforeend", markup);
+  const markup = arr.map(item => cardTemplate(item)).join('');
+  gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-let lightbox = new SimpleLightbox('.gallery a',  {
+let lightbox = new SimpleLightbox('.photo-card a', {
   captions: true,
   captionsData: 'alt',
   captionDelay: 250,
@@ -92,5 +90,3 @@ async function onClickLoadMoreBtn() {
     endCollectionText.classList.remove('is-hidden');
   }
 }
-
-console.log ("hi")
