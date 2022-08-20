@@ -4,7 +4,6 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-
 const { searchForm, gallery, loadMoreBtn, endCollectionText } = {
   searchForm: document.querySelector('.search-form'),
   gallery: document.querySelector('.gallery'),
@@ -42,9 +41,11 @@ async function onSubmitSearchForm(e) {
   currentHits = response.hits.length;
 
   if (response.totalHits > 40) {
-    loadMoreBtn.classList.remove('is-hidden');
+      loadMoreBtn.classList.remove('is-hidden');
+    
   } else {
-    loadMoreBtn.classList.add('is-hidden');
+      loadMoreBtn.classList.add('is-hidden');
+        
   }
 
   try {
@@ -53,7 +54,7 @@ async function onSubmitSearchForm(e) {
       gallery.innerHTML = '';
       renderCardImage(response.hits);
       lightbox.refresh();
-      endCollectionText.classList.add('is-hidden');
+
 
       const { height: cardHeight } = document
         .querySelector('.gallery')
@@ -69,7 +70,7 @@ async function onSubmitSearchForm(e) {
       gallery.innerHTML = '';
       Notify.failure('Sorry, there are no images matching your search query. Please try again.');
       loadMoreBtn.classList.add('is-hidden');
-      endCollectionText.classList.add('is-hidden');
+   
     }
   } catch (error) {
     console.log(error);
@@ -87,6 +88,6 @@ async function onClickLoadMoreBtn() {
 
   if (currentHits === response.totalHits) {
     loadMoreBtn.classList.add('is-hidden');
-    endCollectionText.classList.remove('is-hidden');
+  
   }
 }
